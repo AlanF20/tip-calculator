@@ -94,7 +94,9 @@ html {
   text-align: right;
   color: var(--Very-dark-cyan);
 }
-
+.Input__container-input:focus{
+  outline: none;
+}
 .percentages {
   width: 90%;
   padding: 0px 20px 0px 20px;
@@ -140,7 +142,8 @@ html {
   background-color: var(--Strong-cyan);
   color: var(--Very-dark-cyan);
 }
-.percentajeButton:checked{
+
+.percentageLabel:checked{
   background-color: var(--Very-light-grayish-cyan);
 }
 .ticket {
@@ -196,7 +199,12 @@ html {
 .info {
   flex-direction: column;
 }
-
+.sexo{
+  background-color: var(--Very-dark-cyan);
+}
+.verde{
+  background-color: var(--Strong-cyan);
+}
 @media (min-width: 500px) {
   #root {
     height: 100vh;

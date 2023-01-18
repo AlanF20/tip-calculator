@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react'
 import Ticket from './components/Ticket'
 
 export default function Calculator () {
+  const [pressed, setPressed] = useState(true)
   const [custom, setCustom] = useState(0)
   const [bill, setBill] = useState(0)
   const [people, setPeople] = useState(0)
@@ -30,6 +31,9 @@ export default function Calculator () {
     setPeople(0)
     setPercentage(0)
   }
+  useEffect(()=>{
+    setPressed(false)
+  }, [pressed])
   useEffect(() => {
     isCustom ? setAmountPerson((bill * custom / people) / 100) : setAmountPerson(bill * percentage / people)
   }, [people, percentage, bill, custom])
@@ -39,20 +43,20 @@ export default function Calculator () {
   return (
     <main className='main'>
       <div className='main__containers info'>
-        <Input value={bill} onChange={handleBillChange} nameFor={'Bill'} imageFor={dollar} />
+        <Input onChange={handleBillChange} nameFor={'Bill'} imageFor={dollar} />
         <section className='percentages'>
           <p className='percentages__p'>Select Tip %</p>
           <div className='percentages__container'>
-            <RadButton onClick={() => setPercentage(0.05)} percentage='5' />
+            <RadButton pressed={pressed} onClick={() => setPercentage(0.05)} percentage='5' />
             <RadButton onClick={() => setPercentage(0.10)} percentage='10' />
             <RadButton onClick={() => setPercentage(0.15)} percentage='15' />
             <RadButton onClick={() => setPercentage(0.25)} percentage='25' />
             <RadButton onClick={() => setPercentage(0.50)} percentage='50' />
             <RadButton onClick={handleIsCustom} percentage='Custom' />
           </div>
-          {isCustom && <Input value={custom} onChange={handleCustomChange} nameFor={'Custom %'} />}
+          {isCustom && <Input onChange={handleCustomChange} nameFor={'Custom %'} />}
         </section>
-        <Input value={people} onChange={handlePeopleChange} nameFor={'Number of people'} imageFor={person} />
+        <Input onChange={handlePeopleChange} nameFor={'Number of people'} imageFor={person} />
       </div>
       <div className='main__containers'>
         <Ticket onClick={handleReset} tipTotal={amountPerson} tipTotalPerson={totalPerson} />
